@@ -9,11 +9,53 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var mainView: UIView!
+    @IBOutlet var redValueLabel: UILabel!
+    @IBOutlet var greenValueLabel: UILabel!
+    @IBOutlet var blueValueLabel: UILabel!
+    @IBOutlet var redSlider: UISlider!
+    @IBOutlet var greenSlider: UISlider!
+    @IBOutlet var blueSlider: UISlider!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        mainView.layer.cornerRadius = 15
+        
+        redSliderAction()
+        greenSliderAction()
+        blueSliderAction()
     }
 
 
+    @IBAction func redSliderAction() {
+        redValueLabel.text = toString(redSlider)
+        changeColor()
+    }
+    
+    @IBAction func greenSliderAction() {
+        greenValueLabel.text = toString(greenSlider)
+        changeColor()
+    }
+    
+    @IBAction func blueSliderAction() {
+        blueValueLabel.text = toString(blueSlider)
+        changeColor()
+    }
+    
+    
+    private func toString(_ slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
+    
+    private func changeColor() {
+        mainView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                           green: CGFloat(greenSlider.value),
+                                           blue: CGFloat(blueSlider.value),
+                                           alpha: 1)
+    }
+    
+    
 }
 

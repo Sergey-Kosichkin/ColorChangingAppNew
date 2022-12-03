@@ -10,9 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var mainView: UIView!
+    
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
+    
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
@@ -23,12 +25,12 @@ class ViewController: UIViewController {
         
         mainView.layer.cornerRadius = 15
         
+        redSlider.minimumTrackTintColor = .red
+        greenSlider.minimumTrackTintColor = .green
+        
         redSliderAction()
         greenSliderAction()
         blueSliderAction()
-        
-        redSlider.minimumTrackTintColor = .red
-        greenSlider.minimumTrackTintColor = .green
     }
 
 

@@ -26,6 +26,9 @@ class ViewController: UIViewController {
         redSliderAction()
         greenSliderAction()
         blueSliderAction()
+        
+        redSlider.minimumTrackTintColor = .red
+        greenSlider.minimumTrackTintColor = .green
     }
 
 

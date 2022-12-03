@@ -35,22 +35,22 @@ class ViewController: UIViewController {
 
 
     @IBAction func redSliderAction() {
-        redValueLabel.text = toString(redSlider)
+        redValueLabel.text = string(from: redSlider)
         changeColor()
     }
     
     @IBAction func greenSliderAction() {
-        greenValueLabel.text = toString(greenSlider)
+        greenValueLabel.text = string(from: greenSlider)
         changeColor()
     }
     
     @IBAction func blueSliderAction() {
-        blueValueLabel.text = toString(blueSlider)
+        blueValueLabel.text = string(from: blueSlider)
         changeColor()
     }
     
     
-    private func toString(_ slider: UISlider) -> String {
+    private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
     

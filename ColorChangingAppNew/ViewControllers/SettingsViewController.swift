@@ -116,7 +116,7 @@ class SettingsViewController: UIViewController {
 
 
 
-// MARK: Work With keyboard
+// MARK: -Work With keyboard
 extension SettingsViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -147,7 +147,7 @@ extension SettingsViewController: UITextFieldDelegate {
 
 
 
-// MARK: Values conversion
+// MARK: -Values conversion
 extension SettingsViewController {
     
     enum Coloring {
@@ -197,7 +197,7 @@ extension SettingsViewController {
 
 
 
-// MARK: Work with color
+// MARK: -Work with color
 extension SettingsViewController {
     
     private func setupColorValues(forLabel label: Bool,
@@ -254,7 +254,7 @@ extension SettingsViewController {
 
 
 
-// MARK: Work with UIColor
+// MARK: -Work with UIColor
 extension UIColor {
     var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var red: CGFloat = 0

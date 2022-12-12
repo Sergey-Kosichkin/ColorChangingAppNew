@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
                         blue: CGFloat,
                         alpha: CGFloat)!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,53 +52,53 @@ class SettingsViewController: UIViewController {
     
     @IBAction func redSliderAction() {
         color.red = CGFloat(redSlider.value)
-        setupColorValues(withColor: .red,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: false,
-                         textField: true)
+                         withColor: .red)
         
     }
     
     @IBAction func greenSliderAction() {
         color.green = CGFloat(greenSlider.value)
-        setupColorValues(withColor: .green,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: false,
-                         textField: true)
+                         withColor: .green)
     }
     
     @IBAction func blueSliderAction() {
         color.blue = CGFloat(blueSlider.value)
-        setupColorValues(withColor: .blue,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: false,
-                         textField: true)
+                         withColor: .blue)
     }
     
     @IBAction func redTFAction() {
         color.red = color(fromString: redTF.text ?? "0")
-        setupColorValues(withColor: .red,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: true,
-                         textField: true)
+                         withColor: .red)
         
     }
     
     @IBAction func greenTFAction() {
         color.green = color(fromString: greenTF.text ?? "0")
-        setupColorValues(withColor: .green,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: true,
-                         textField: true)
+                         withColor: .green)
         
     }
     
     @IBAction func blueTFAction() {
         color.blue = color(fromString: blueTF.text ?? "0")
-        setupColorValues(withColor: .blue,
-                         forLabel: true,
+        setupColorValues(forLabel: true,
+                         textField: true,
                          slider: true,
-                         textField: true)
+                         withColor: .blue)
     }
     
     
@@ -123,19 +124,23 @@ extension SettingsViewController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    private func addDoneButtonOnNumpad(textField: UITextField) {
+    private func addDoneButtonOnNumpad(textFields: UITextField...) {
         
-        let toolBar: UIToolbar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        toolBar.items = [UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
-                                         target: nil,
-                                         action: nil),
-                         UIBarButtonItem(title: "Done",
-                                         style: UIBarButtonItem.Style.done,
-                                         target: textField,
-                                         action: #selector(UITextField.resignFirstResponder))]
-        textField.inputAccessoryView = toolBar
+        for textField in textFields {
+            
+            let toolBar: UIToolbar = UIToolbar()
+            toolBar.sizeToFit()
+            
+            toolBar.items = [UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+                                             target: nil,
+                                             action: nil),
+                             UIBarButtonItem(title: "Done",
+                                             style: UIBarButtonItem.Style.done,
+                                             target: textField,
+                                             action: #selector(UITextField.resignFirstResponder))]
+            textField.inputAccessoryView = toolBar
+            
+        }
     }
     
 }
@@ -175,14 +180,16 @@ extension SettingsViewController {
         let float = Float(value)
         
         UIView.animate(withDuration: 0.2, animations: {
+            
+            guard var slider = self.redSlider else { return }
+            
             switch coloring {
-            case .red:
-                self.redSlider.setValue(float, animated:true)
-            case .green:
-                self.greenSlider.setValue(float, animated:true)
-            case .blue:
-                self.blueSlider.setValue(float, animated:true)
+            case .red: break
+            case .green: slider = self.greenSlider
+            case .blue: slider = self.blueSlider
             }
+            
+            slider.setValue(float, animated:true)
         })
     }
     
@@ -193,23 +200,27 @@ extension SettingsViewController {
 // MARK: Work with color
 extension SettingsViewController {
     
-    private func setupColorValues(withColor coloring: Coloring,
-                                  forLabel label: Bool,
+    private func setupColorValues(forLabel label: Bool,
+                                  textField: Bool,
                                   slider: Bool,
-                                  textField: Bool) {
-        switch coloring {
-        case .red:
-            if label { redValueLabel.text = string(fromColor: color.red) }
-            if slider { animateSlider(with: color.red, andColoring: .red) }
-            if textField { redTF.text = string(fromColor: color.red) }
-        case .green:
-            if label { greenValueLabel.text = string(fromColor: color.green) }
-            if slider { animateSlider(with: color.green, andColoring: .green) }
-            if textField { greenTF.text = string(fromColor: color.green) }
-        case .blue:
-            if label { blueValueLabel.text = string(fromColor: color.blue) }
-            if slider { animateSlider(with: color.blue, andColoring: .blue) }
-            if textField { blueTF.text = string(fromColor: color.blue) }
+                                  withColor colorings: Coloring...) {
+        for coloring in colorings {
+            
+            switch coloring {
+            case .red:
+                if label { redValueLabel.text = string(fromColor: color.red) }
+                if textField { redTF.text = string(fromColor: color.red) }
+                if slider { animateSlider(with: color.red, andColoring: .red) }
+            case .green:
+                if label { greenValueLabel.text = string(fromColor: color.green) }
+                if textField { greenTF.text = string(fromColor: color.green) }
+                if slider { animateSlider(with: color.green, andColoring: .green) }
+            case .blue:
+                if label { blueValueLabel.text = string(fromColor: color.blue) }
+                if textField { blueTF.text = string(fromColor: color.blue) }
+                if slider { animateSlider(with: color.blue, andColoring: .blue) }
+            }
+            
         }
         changeColor()
     }
@@ -229,13 +240,12 @@ extension SettingsViewController {
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
         
-        addDoneButtonOnNumpad(textField: redTF)
-        addDoneButtonOnNumpad(textField: greenTF)
-        addDoneButtonOnNumpad(textField: blueTF)
+        addDoneButtonOnNumpad(textFields: redTF, greenTF, blueTF)
         
-        setupColorValues(withColor: .red, forLabel: true, slider: true, textField: true)
-        setupColorValues(withColor: .green, forLabel: true, slider: true, textField: true)
-        setupColorValues(withColor: .blue, forLabel: true, slider: true, textField: true)
+        setupColorValues(forLabel: true,
+                         textField: true,
+                         slider: true,
+                         withColor: .red, .green, .blue)
         
         mainView.backgroundColor = viewColor
     }

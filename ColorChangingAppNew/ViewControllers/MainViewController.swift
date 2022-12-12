@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol SettingsViewControllerDelegate {
+    func setNewColor(for viewColor: UIColor)
+}
+
+
 class MainViewController: UIViewController {
 
     
@@ -24,5 +29,14 @@ class MainViewController: UIViewController {
             return
         }
         settingsVC.viewColor = viewColor
+        settingsVC.delegate = self
+    }
+}
+
+
+
+extension MainViewController: SettingsViewControllerDelegate {
+    func setNewColor(for viewColor: UIColor) {
+        self.viewColor = viewColor
     }
 }

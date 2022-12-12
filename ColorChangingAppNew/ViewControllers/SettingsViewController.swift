@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet var greenTF: UITextField!
     @IBOutlet var blueTF: UITextField!
     
+    var delegate: SettingsViewControllerDelegate!
     
     var viewColor = UIColor(red: 0,
                             green: 0,
@@ -37,7 +38,6 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.hidesBackButton = true
         mainView.layer.cornerRadius = 15
         
         SetupUI()
@@ -102,7 +102,12 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func doneButtonAction() {
-        
+        viewColor = UIColor(red: color.red,
+                            green: color.green,
+                            blue: color.blue,
+                            alpha: color.alpha)
+        delegate.setNewColor(for: viewColor)
+        dismiss(animated: true)
     }
     
     

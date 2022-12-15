@@ -182,10 +182,10 @@
                         <outlet property="blueSlider" destination="Ez3-c9-NKS" id="nhw-DK-7J3"/>
                         <outlet property="blueTF" destination="brs-0E-UKz" id="fcN-Jm-D3z"/>
                         <outlet property="blueValueLabel" destination="ucC-WD-Yyd" id="47B-GQ-UIB"/>
+                        <outlet property="colorView" destination="XAr-WC-gGa" id="039-PX-DjV"/>
                         <outlet property="greenSlider" destination="E13-oW-WZw" id="T23-8j-MwB"/>
                         <outlet property="greenTF" destination="Nee-YR-2go" id="XXw-Pd-UtS"/>
                         <outlet property="greenValueLabel" destination="tf6-f8-ODb" id="4oQ-T5-iHA"/>
-                        <outlet property="mainView" destination="XAr-WC-gGa" id="039-PX-DjV"/>
                         <outlet property="redSlider" destination="ol3-BM-UgM" id="p1R-LT-GQH"/>
                         <outlet property="redTF" destination="7rx-BC-kSm" id="6vx-PR-8NA"/>
                         <outlet property="redValueLabel" destination="zPK-Ol-W7b" id="m6q-8O-qMb"/>
@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1932.5581395348836" y="3.218884120171674"/>
+            <point key="canvasLocation" x="1778" y="3"/>
         </scene>
         <!--Item-->
         <scene sceneID="lRS-Ga-TTo">
@@ -212,7 +212,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHj-yA-I3D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188.37209302325581" y="2.5751072961373391"/>
+            <point key="canvasLocation" x="399" y="3"/>
         </scene>
     </scenes>
     <resources>

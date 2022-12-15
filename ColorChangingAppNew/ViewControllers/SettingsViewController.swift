@@ -9,7 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet var mainView: UIView!
+    @IBOutlet var colorView: UIView!
     
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
@@ -25,10 +25,7 @@ class SettingsViewController: UIViewController {
     
     var delegate: SettingsViewControllerDelegate!
     
-    var viewColor = UIColor(red: 0,
-                            green: 0,
-                            blue: 0,
-                            alpha: 0)
+    var viewColor: UIColor!
     
     private var color: (red: CGFloat,
                         green: CGFloat,
@@ -39,7 +36,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainView.layer.cornerRadius = 15
+        colorView.layer.cornerRadius = 15
         
         SetupUI()
         
@@ -103,11 +100,11 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func doneButtonAction() {
-        viewColor = UIColor(red: color.red,
-                            green: color.green,
-                            blue: color.blue,
-                            alpha: color.alpha)
-        delegate.setNewColor(for: viewColor)
+//        viewColor = UIColor(red: color.red,
+//                            green: color.green,
+//                            blue: color.blue,
+//                            alpha: color.alpha)
+        delegate.setNewColor(for: colorView.backgroundColor ?? .white)
         dismiss(animated: true)
     }
     
@@ -128,14 +125,14 @@ extension SettingsViewController: UITextFieldDelegate {
         
         for textField in textFields {
             
-            let toolBar: UIToolbar = UIToolbar()
+            let toolBar = UIToolbar()
             toolBar.sizeToFit()
             
-            toolBar.items = [UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            toolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                              target: nil,
                                              action: nil),
                              UIBarButtonItem(title: "Done",
-                                             style: UIBarButtonItem.Style.done,
+                                             style: .done,
                                              target: textField,
                                              action: #selector(UITextField.resignFirstResponder))]
             textField.inputAccessoryView = toolBar
@@ -227,7 +224,7 @@ extension SettingsViewController {
    
     
     private func changeColor() {
-        mainView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
                                            green: CGFloat(greenSlider.value),
                                            blue: CGFloat(blueSlider.value),
                                            alpha: 1)
@@ -247,7 +244,7 @@ extension SettingsViewController {
                          slider: true,
                          withColor: .red, .green, .blue)
         
-        mainView.backgroundColor = viewColor
+        colorView.backgroundColor = viewColor
     }
     
 }
